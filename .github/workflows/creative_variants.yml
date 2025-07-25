@@ -18,7 +18,7 @@ jobs:
             run: npm ci
 
           - name: Install Playwright Browsers
-            uses: microsoft/playwright-github-action@v1
+            uses: npx playwright install --with-deps
 
           - name: Run Chrome tests
             run: npx codeceptjs run-multiple desktop:chromium --steps
@@ -53,7 +53,7 @@ jobs:
             run: npm ci
           
           - name: Install Playwright browsers
-            uses: microsoft/playwright-github-action@v1
+            uses: npx playwright install --with-deps
 
           - name: Run Firefox tests
             run: npx codeceptjs run-multiple desktop:firefox --grep "^((?!@chromiumOnly).)*$" --steps
@@ -82,13 +82,13 @@ jobs:
             run: npm ci
 
           - name: Install Playwright browsers
-            uses: microsoft/playwright-github-action@v1
+            uses: npx playwright install --with-deps
         
           - name: Run Safari tests
             run: npx codeceptjs run-multiple desktop:webkit --grep "^((?!@chromiumOnly).)*$" --steps
             env: 
                 HEADLESS: true
-                
+
           - name: Upload artifacts
             uses: actions/upload-artifact@v4
             with:
