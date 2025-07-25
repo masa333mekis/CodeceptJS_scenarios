@@ -26,6 +26,7 @@ jobs:
                 HEADLESS: true
 
           - name: Allure report
+            if: always()
             run: npx allure generate output --clean -o output/allure-report
 
           - name: Upload visual test report

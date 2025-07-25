@@ -36,7 +36,7 @@ exports.config = {
     allure: {
       enabled: true,
       require: 'allure-codeceptjs',
-      //outputDir: './output/allure-report',
+      outputDir: './output/allure-report',
     },
   },
   include: {
