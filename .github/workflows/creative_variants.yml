@@ -18,7 +18,7 @@ jobs:
             run: npm ci
 
           - name: Install Playwright Browsers
-            uses: npx playwright install --with-deps
+            run: npx playwright install --with-deps
 
           - name: Run Chrome tests
             run: npx codeceptjs run-multiple desktop:chromium --steps
@@ -53,7 +53,7 @@ jobs:
             run: npm ci
           
           - name: Install Playwright browsers
-            uses: npx playwright install --with-deps
+            run: npx playwright install --with-deps
 
           - name: Run Firefox tests
             run: npx codeceptjs run-multiple desktop:firefox --grep "^((?!@chromiumOnly).)*$" --steps
