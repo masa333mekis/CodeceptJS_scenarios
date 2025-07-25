@@ -16,5 +16,8 @@
         "@codeceptjs/ui": "^1.2.5",
         "codeceptjs": "^3.7.3",
         "playwright": "^1.54.1"
+    },
+    "dependencies": {
+        "codeceptjs-pixelmatchhelper": "^1.0.6"
     }
 }

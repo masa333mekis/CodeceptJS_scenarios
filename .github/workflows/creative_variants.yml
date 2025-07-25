@@ -1,0 +1,105 @@
+name: Automation tests
+
+on: [ push ]
+
+jobs:
+    chrome-test:
+        name: Run tests on Chrome
+        runs-on: ubuntu-latest
+
+        steps:
+          - name: Checkout code
+            uses: actions/checkout@v4
+
+          - name: Set up Node.js
+            uses: actions/setup-node@v4
+
+          - name: Install dependencies
+            run: npm ci
+
+          - name: Install Playwright Browsers
+            uses: microsoft/playwright-github-action@v1
+
+          - name: Run Chrome tests
+            run: npx codeceptjs run-multiple desktop:chromium --steps
+            env: 
+                HEADLESS: true
+
+          - name: Upload artifacts
+            uses: actions/upload-artifact@v4
+            with:
+                name: chrome-report
+                path: output/
+
+          - name: Upload visual diff artifacts
+            if: always()
+            uses: actions/upload-artifact@v4
+            with:
+                name: pixel-diffs-chrome
+                path: tests/screenshots/diff/
+        
+    firefox-test:
+        name: Run tests on Firefox
+        runs-on: ubuntu-latest
+
+        steps:
+          - name: Checkout code
+            uses: actions/checkout@v4
+          
+          - name: Set up Node.js
+            uses: actions/setup-node@v4
+          
+          - name: Install dependencies
+            run: npm ci
+          
+          - name: Install Playwright browsers
+            uses: microsoft/playwright-github-action@v1
+
+          - name: Run Firefox tests
+            run: npx codeceptjs run-multiple desktop:firefox --grep "^((?!@chromiumOnly).)*$" --steps
+            env: 
+                 HEADLESS: true
+                 HOME: /root
+                 
+          - name: Upload artifacts
+            uses: actions/upload-artifact@v4
+            with:
+                name: firefox-report
+                path: output/
+    
+    safari-test:
+        name: Run tests on Safari
+        runs-on: ubuntu-latest
+
+        steps:
+          - name: Checkout code
+            uses: actions/checkout@v4
+         
+          - name: Set up Node
+            uses: actions/setup-node@v4
+        
+          - name: Install dependencies
+            run: npm ci
+
+          - name: Install Playwright browsers
+            uses: microsoft/playwright-github-action@v1
+        
+          - name: Run Safari tests
+            run: npx codeceptjs run-multiple desktop:webkit --grep "^((?!@chromiumOnly).)*$" --steps
+            env: 
+                HEADLESS: true
+                
+          - name: Upload artifacts
+            uses: actions/upload-artifact@v4
+            with:
+                name: safari-report
+                path: output/
+
+    
+      
+
+
+
+
+
+

@@ -1,1 +1,8 @@
 node_modules
+# Ignore outputs locally, dont commit
+output/**
+tests/screenshots/diff/**
+# Allow baseline (expected) screenshots to stay in repo
+!tests/screenshots/base/**
+
+

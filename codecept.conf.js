@@ -8,15 +8,30 @@ setCommonPlugins();
 
 /** @type {CodeceptJS.MainConfig} */
 exports.config = {
-  tests: './*_test.js',
+  tests: './tests/*_test.js',
   output: './output',
   helpers: {
     Playwright: {
       browser: 'chromium',
       url: 'https://martin-kregar.celtra.com/explorer/1df8d540',
-      show: true
-    }
+      show: true,
+      waitForNavigation: "networkidle0",
+    },
+    PixelmatchHelper: {
+        require: "codeceptjs-pixelmatchhelper",
+        dirExpected:  "./tests/screenshots/base/",   
+        dirDiff:      "./tests/screenshots/diff/",    
+    },
   },
+   multiple: {
+   desktop: {
+       browsers: [
+       { browser: 'chromium' },
+       { browser: 'firefox' },
+       { browser: 'webkit' }
+     ]
+   },
+ },
   include: {
     I: './steps_file.js'
   },
