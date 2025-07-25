@@ -1,4 +1,4 @@
-name: Automation tests
+name: Automation tests for CodeceptJS
 
 on: [ push ]
 
