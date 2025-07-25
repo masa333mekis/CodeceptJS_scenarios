@@ -125,7 +125,8 @@ Scenario('Creative data validation', async ({ I }) => {
     });
 });
 
-//Not running in Github Actions CI
+//Not running in Github Actions CI, because of saved image failure
+//Locally works fine and passes
 const isCI = !!process.env.CI;
 (isCI ? Scenario.skip : Scenario)('Ads are pixel-perfect', async ({ I }) => {
     
