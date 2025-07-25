@@ -56,7 +56,7 @@ jobs:
             run: npx playwright install --with-deps
 
           - name: Run Firefox tests
-            run: npx codeceptjs run-multiple desktop:firefox --grep "^((?!@chromiumOnly).)*$" --steps
+            run: npx codeceptjs run-multiple desktop:firefox --steps
             env: 
                  HEADLESS: true
                  HOME: /root
@@ -85,7 +85,7 @@ jobs:
             run: npx playwright install --with-deps
         
           - name: Run Safari tests
-            run: npx codeceptjs run-multiple desktop:webkit --grep "^((?!@chromiumOnly).)*$" --steps
+            run: npx codeceptjs run-multiple desktop:webkit --steps
             env: 
                 HEADLESS: true
 

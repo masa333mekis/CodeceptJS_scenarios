@@ -125,8 +125,9 @@ Scenario('Creative data validation', async ({ I }) => {
     });
 });
 
-//Only on chromium because of the multiple images with same name
-Scenario('Ads are pixel-perfect @chromiumOnly', async ({ I }) => {
+//Not running in Github Actions CI
+const isCI = !!process.env.CI;
+(isCI ? Scenario.skip : Scenario)('Ads are pixel-perfect', async ({ I }) => {
     
     I.amOnPage('https://martin-kregar.celtra.com/explorer/1df8d540');
     
