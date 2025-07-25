@@ -6,6 +6,8 @@ jobs:
     chrome-test:
         name: Run tests on Chrome
         runs-on: ubuntu-latest
+        container:
+            image: mcr.microsoft.com/playwright:v1.54.1-jammy
 
         steps:
           - name: Checkout code
@@ -17,24 +19,17 @@ jobs:
           - name: Install dependencies
             run: npm ci
 
-          - name: Install Playwright Browsers
-            run: npx playwright install --with-deps
-
           - name: Run Chrome tests
             run: npx codeceptjs run-multiple desktop:chromium --steps
             env: 
                 HEADLESS: true
 
-          - name: Allure report
-            if: always()
-            run: npx allure-commandline generate output/allure-results --clean -o output/allure-report
-
-          - name: Upload visual test report
+          - name: Upload artifacts
             uses: actions/upload-artifact@v4
             if: always()
             with:
                 name: chrome-report
-                path: output/allure-report
+                path: output/
 
     firefox-test:
         name: Run tests on Firefox
@@ -68,6 +63,8 @@ jobs:
     safari-test:
         name: Run tests on Safari
         runs-on: ubuntu-latest
+        container:
+            image: mcr.microsoft.com/playwright:v1.54.1-jammy
 
         steps:
           - name: Checkout code
@@ -78,9 +75,6 @@ jobs:
         
           - name: Install dependencies
             run: npm ci
-
-          - name: Install Playwright browsers
-            run: npx playwright install --with-deps
         
           - name: Run Safari tests
             run: npx codeceptjs run-multiple desktop:webkit --steps
