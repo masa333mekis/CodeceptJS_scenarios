@@ -27,7 +27,7 @@ jobs:
 
           - name: Allure report
             if: always()
-            run: npx allure generate output --clean -o output/allure-report
+            run: npx allure-commandline generate output/allure-results --clean -o output/allure-report
 
           - name: Upload visual test report
             uses: actions/upload-artifact@v4
