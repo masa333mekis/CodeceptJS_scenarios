@@ -32,6 +32,13 @@ exports.config = {
      ]
    },
  },
+ plugins: {
+    allure: {
+      enabled: true,
+      require: 'allure-codeceptjs',
+      //outputDir: './output/allure-report',
+    },
+  },
   include: {
     I: './steps_file.js'
   },
