@@ -82,7 +82,7 @@ jobs:
             run: npm ci
 
           - name: Install Playwright browsers
-            uses: npx playwright install --with-deps
+            run: npx playwright install --with-deps
         
           - name: Run Safari tests
             run: npx codeceptjs run-multiple desktop:webkit --grep "^((?!@chromiumOnly).)*$" --steps
